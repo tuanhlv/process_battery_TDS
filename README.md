@@ -31,11 +31,11 @@ A Python suite designed to automate the end-to-end workflow of battery performan
 ## INSTALLATION
 
 1. **Clone the repository:**
-  ```bash
+bash
    git clone https://github.com/tuanhlv/process_battery_TDS.git
    
 2. **Install Dependencies:**
-  ```bash
+bash
    pip install pandas matplotlib requests pydantic numpy
 
 ## CONFIGURATION
