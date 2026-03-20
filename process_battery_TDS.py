@@ -13,10 +13,10 @@ from pydantic import BaseModel, Field, ValidationError
 # Pydantic Models for Validation
 # ==========================================
 class QuickBaseConfig(BaseModel):
-    token: str = Field(default="qb_user_token", description="QuickBase User Token")
-    hostname: str = Field(default="https://company.quickbase.com", description="QuickBase Hostname")
-    test_table: str = Field(default="cell_test_table_id", description="Cell Test table ID")
-    cell_part_table: str = Field(default="cell_part_table_id", description="Cell Part table ID")
+    token: str = Field(default="bytuu3_wfx_53f6zibdnpvd5bavwjd26avh8", description="QuickBase User Token")
+    hostname: str = Field(default="https://ampriusinc.quickbase.com", description="QuickBase Hostname")
+    test_table: str = Field(default="bqg4mcgfv", description="Cell Test table ID")
+    cell_part_table: str = Field(default="bqg4mcgch", description="Cell Part table ID")
 
 
 # ==========================================
@@ -165,7 +165,7 @@ class BatteryAnalyzer:
             ax22.plot(charge_df['Charge_Duration_min'], charge_df['Current'], label=f'{c_rate}C Current', color=color,
                       linestyle='--')
 
-            split_csv = os.path.join(processed_folder, f'_chargeProfile_{c_rate}C.csv')
+            split_csv = f"{processed_folder}_chargeProfile_{c_rate}C.csv"
             charge_df[['Charge_Duration_min', 'Voltage', 'Current']].to_csv(split_csv, index=False)
 
         ax11.grid(True)
@@ -274,7 +274,7 @@ class BatteryAnalyzer:
             elif discharge_df['Temperature2'].notnull().any():
                 export_cols.insert(2, 'Temperature2')
 
-            split_csv = os.path.join(processed_folder, f'_dischargeProfile_{c_rate}C.csv')
+            split_csv = f"{processed_folder}_dischargeProfile_{c_rate}C.csv"
             discharge_df[export_cols].to_csv(split_csv, index=False)
 
         ax11.legend(title='C-Rate', loc='best')
@@ -334,7 +334,7 @@ class BatteryAnalyzer:
                 discharge_df['Capacity_Ratio'] = (discharge_df['Discharge_Capacity'] / max_capacity_ref) * 100
                 ax2.plot(discharge_df['Capacity_Ratio'], discharge_df['Voltage'], label=f'{temp}°C', color=color)
 
-                split_csv = os.path.join(processed_folder, f'_HLTdischargeProfile_{temp}C.csv')
+                split_csv = f"{processed_folder}_HLTdischargeProfile_{temp}C.csv"
                 discharge_df[['Discharge_Capacity', 'Voltage', 'Capacity_Ratio']].to_csv(split_csv, index=False)
 
                 res_temp.append(temp)
@@ -471,7 +471,7 @@ class BatteryAnalyzer:
             ax1.plot(eoc['Cycle_Index'], eoc['Discharge_Capacity'], color=line_color, label=f"{c_rate}C")
             ax2.plot(eoc['Cycle_Index'], eoc['Capacity_Retention'], color=line_color, label=f"{c_rate}C")
 
-            processed_csv_fn = os.path.join(processed_folder, f"{processed_csv_prefix}_{c_rate}.csv")
+            processed_csv_fn = f"{processed_folder}{processed_csv_prefix}_{c_rate}.csv"
             eoc[['Cycle_Index', 'Discharge_Capacity', 'Capacity_Retention']].to_csv(processed_csv_fn, index=False)
 
         if not cap0_list:
