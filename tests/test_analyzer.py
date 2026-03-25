@@ -4,15 +4,6 @@ import pandas as pd
 from analytics import extract_temperature_columns, plot_rate_charge, plot_rate_discharge, plot_temperature_perf
 from unittest.mock import patch
 
-# Import the classes from the main script
-from groupCells import (
-    BatteryCellGrouper,
-    PackValidator,
-    QuickBaseConfig,
-    QuickBaseClient,
-    handle_api_errors
-)
-
 
 # ====================================================================================
 # 1. Test temperature extraction from the raw csv
