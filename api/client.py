@@ -4,8 +4,8 @@
 
 import requests
 import pandas as pd
-from config.settings import QuickBaseConfig
-from utils.logger import ExecutionLogger
+from config import QuickBaseConfig
+from utils import ExecutionLogger, handle_api_errors
 
 class QuickBaseAPIClient:
     """Handles API communications with QuickBase."""
@@ -27,12 +27,13 @@ class QuickBaseAPIClient:
             "where": query
         }
 
-        response = requests.post(
-            'https://api.quickbase.com/v1/records/query',
-            headers=self.headers,
-            json=body
-        )
-        response.raise_for_status()
+        with handle_api_errors():
+            response = requests.post(
+                'https://api.quickbase.com/v1/records/query',
+                headers=self.headers,
+                json=body
+            )
+            response.raise_for_status()
 
         data = response.json().get('data', [])
         df = pd.json_normalize(data)

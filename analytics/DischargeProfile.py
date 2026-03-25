@@ -5,16 +5,15 @@ from utils import handle_exceptions
 from .common_helpers import get_c_rate_color_map
 
 @handle_exceptions("Discharge Profiling")
-def plot_rate_discharge(csv_file_path: str, cycle_numbers_str: str, discharge_rates_str: str,
-                        png_path1: str, png_path2: str, csv_res_path: str, thermocouple: Any,
-                        n_thermocouples: int, processed_folder: str) -> None:
+def plot_rate_discharge(csv_file_path: str, cycle_numbers_str: str, rates_str: str, png_path1: str, png_path2: str,
+                        csv_res_path: str, processed_folder: str) -> None:
     cycles: list[int] = [int(c.strip()) for c in cycle_numbers_str.split(',')]
-    rates: list[float] = [float(r.strip()) for r in discharge_rates_str.split(',')]
+    rates: list[float] = [float(r.strip()) for r in rates_str.split(',')]
 
     if 0.2 not in rates:
         raise ValueError("Reference C-rate 0.2 not found in the input list. Plotting skipped.")
     if len(cycles) != len(rates):
-        raise ValueError("Cycle numbers count must match discharge rates count.")
+        raise ValueError("Cycle numbers count must match rates count.")
 
     cycle_to_c_rate_map = dict(zip(cycles, rates))
     df = pd.read_csv(csv_file_path)
@@ -66,7 +65,7 @@ def plot_rate_discharge(csv_file_path: str, cycle_numbers_str: str, discharge_ra
         elif 'T1' in discharge_df.columns and pd.api.types.is_numeric_dtype(discharge_df['T1']):
             discharge_df['Temperature1'] = discharge_df['T1']
 
-        if n_thermocouples > 1 and 'T2' in discharge_df.columns and pd.api.types.is_numeric_dtype(
+        if 'T2' in discharge_df.columns and pd.api.types.is_numeric_dtype(
                 discharge_df['T2']):
             discharge_df['Temperature2'] = discharge_df['T2']
 

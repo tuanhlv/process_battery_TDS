@@ -5,15 +5,15 @@ from utils import handle_exceptions
 from .common_helpers import get_c_rate_color_map
 
 @handle_exceptions("Charge Profiling")
-def plot_rate_charge(csv_file_path: str, cycle_numbers_str: str, charge_rates_str: str,
-                     png_path1: str, png_path2: str, processed_folder: str, csv_res_path: str) -> None:
+def plot_rate_charge(csv_file_path: str, cycle_numbers_str: str, rates_str: str, png_path1: str, png_path2: str,
+                    csv_res_path: str, processed_folder: str) -> None:
     cycles: list[int] = [int(c.strip()) for c in cycle_numbers_str.split(',')]
-    charge_rates: list[float] = [float(r.strip()) for r in charge_rates_str.split(',')]
+    charge_rates: list[float] = [float(r.strip()) for r in rates_str.split(',')]
 
     if 0.2 not in charge_rates:
         raise ValueError("Reference C-rate 0.2 not found in the input list. Plotting skipped.")
     if len(cycles) != len(charge_rates):
-        raise ValueError("Cycle numbers count must match charge rates count.")
+        raise ValueError("Cycle numbers count must match rates count.")
 
     cycle_to_c_rate_map = dict(zip(cycles, charge_rates))
     if not os.path.exists(csv_file_path):

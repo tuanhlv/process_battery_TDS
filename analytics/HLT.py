@@ -1,10 +1,11 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from .common_helpers import get_temp_color_map
 from utils import handle_exceptions
 
 @handle_exceptions("Temperature Performance")
-def plot_temperature_perf(cls, csv_file_path: str, cycle_numbers_str: str, temperatures_str: str, png_path1: str, png_path2: str, csv_res_path: str, processed_folder: str) -> None:
+def plot_temperature_perf(csv_file_path: str, cycle_numbers_str: str, temperatures_str: str, png_path1: str, png_path2: str, csv_res_path: str, processed_folder: str) -> None:
     cycles: list[int] = [int(c.strip()) for c in cycle_numbers_str.split(',')]
     temperatures: list[int] = [int(t.strip()) for t in temperatures_str.split(',')]
 
@@ -15,7 +16,7 @@ def plot_temperature_perf(cls, csv_file_path: str, cycle_numbers_str: str, tempe
 
     cycle_to_temp_map = dict(zip(cycles, temperatures))
     df = pd.read_csv(csv_file_path)
-    color_map = cls.get_temp_color_map()
+    color_map = get_temp_color_map()
 
     fig1, ax1 = plt.subplots(figsize=(12, 8))
     ax1.set(xlabel='Discharge Capacity (Ah)', ylabel='Voltage (V)',

@@ -18,7 +18,7 @@ class TestPipeline:
     def process_cell_tests(self) -> None:
         fids = ["3", "203", "443", "444", "445", "446", "447", "448", "457", "458",
                 "460", "454", "497", "461", "463", "462", "464", "465", "466", "504",
-                "469", "470", "480", "486", "224", "361", "495"]
+                "469", "470", "480", "486", "495"]
         fnames = ["Test ID", "Cell - Target Capacity (Ah)", "TDS Input - Rate Capability - Cycle Numbers",
                   "TDS Input - Rate Capability - Discharge Rates", "TDS Input - Charge Profiling - Cycle Numbers",
                   "TDS Input - Charge Profiling - Charge Rates", "TDS Input - Temperature Perf - Cycle Numbers",
@@ -30,7 +30,7 @@ class TestPipeline:
                   "TDS filepath - charge rate capability results CSV",
                   "TDS filepath - discharge rate capability results CSV",
                   "TDS filepath - temperature performance results CSV", "TDS filepath - DCIR results CSV",
-                  "TDS Input - DCIR Pulse C-rate", "Thermocouple?", "# thermocouples", "TDS filepath - CSV folder"]
+                  "TDS Input - DCIR Pulse C-rate", "TDS filepath - CSV folder"]
 
         query = "({457.EX.'TRUE'} OR {458.EX.'TRUE'}"
         for fid in fids[2:-18]:
@@ -48,29 +48,25 @@ class TestPipeline:
             raw_csv = row.get('TDS filepath - raw data CSV')
             folder = row.get('TDS filepath - CSV folder')
 
-            if row.get('TDS Input - Charge Profiling - Cycle Numbers') and row.get(
-                    'TDS Input - Charge Profiling - Charge Rates'):
+            if row.get('TDS Input - Charge Profiling - Cycle Numbers') and row.get('TDS Input - Charge Profiling - Charge Rates'):
                 self.logger.log("  -> Plotting charge profiles")
                 plot_rate_charge(
                     raw_csv, row['TDS Input - Charge Profiling - Cycle Numbers'],
                     row['TDS Input - Charge Profiling - Charge Rates'], row['TDS filepath - charge profile PNG1'],
-                    row['TDS filepath - charge profile PNG2'], folder,
-                    row['TDS filepath - charge rate capability results CSV']
+                    row['TDS filepath - charge profile PNG2'],
+                    row['TDS filepath - charge rate capability results CSV'], folder
                 )
 
-            if row.get('TDS Input - Rate Capability - Cycle Numbers') and row.get(
-                    'TDS Input - Rate Capability - Discharge Rates'):
+            if row.get('TDS Input - Rate Capability - Cycle Numbers') and row.get('TDS Input - Rate Capability - Discharge Rates'):
                 self.logger.log("  -> Plotting discharge profiles")
                 plot_rate_discharge(
                     raw_csv, row['TDS Input - Rate Capability - Cycle Numbers'],
                     row['TDS Input - Rate Capability - Discharge Rates'], row['TDS filepath - discharge profile PNG'],
                     row['TDS filepath - discharge profile, norm PNG'],
-                    row['TDS filepath - discharge rate capability results CSV'],
-                    row['Thermocouple?'], int(row.get('# thermocouples', 1)), folder
+                    row['TDS filepath - discharge rate capability results CSV'], folder
                 )
 
-            if row.get('TDS Input - Temperature Perf - Cycle Numbers') and row.get(
-                    'TDS Input - Temperature Perf - Discharge Temperature'):
+            if row.get('TDS Input - Temperature Perf - Cycle Numbers') and row.get('TDS Input - Temperature Perf - Discharge Temperature'):
                 self.logger.log("  -> Plotting HLT discharge profiles")
                 plot_temperature_perf(
                     raw_csv, row['TDS Input - Temperature Perf - Cycle Numbers'],
