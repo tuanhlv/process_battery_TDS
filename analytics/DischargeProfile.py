@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-from typing import Any
 from utils import handle_exceptions
 from .common_helpers import get_c_rate_color_map
 

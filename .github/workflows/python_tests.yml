@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas os csv requests pandas numpy matplotlib typing functools pydantic pytest
+        pip install pandas csv requests numpy matplotlib functools pydantic pytest
 
     # 4. Execute the tests!
     - name: Run Pytest
