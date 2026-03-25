@@ -69,7 +69,7 @@ def test_temperature_extraction(csv_filename, expected_t1_first, expected_t2_fir
 
 def test_rate_inputs(cycles_str, rates, expected_error_msg):
     with pytest.raises(ValueError) as exc1_info:
-        plot_rate_charge(
+        plot_rate_charge.__wrapped__( # Add .__wrapped__ to bypass the exception-swallowing decorator
             csv_file_path="fake_path.csv", 
             cycle_numbers_str=cycles_str, 
             rates_str=rates,
@@ -81,7 +81,7 @@ def test_rate_inputs(cycles_str, rates, expected_error_msg):
     assert expected_error_msg in str(exc1_info.value)
     
     with pytest.raises(ValueError) as exc2_info:
-        plot_rate_discharge(
+        plot_rate_discharge.__wrapped__( # Add .__wrapped__ to bypass the exception-swallowing decorator
             csv_file_path="fake_path.csv", 
             cycle_numbers_str=cycles_str, 
             rates_str=rates,
@@ -112,7 +112,7 @@ def test_rate_inputs(cycles_str, rates, expected_error_msg):
 
 def test_hlt_inputs(cycles_str, temp_str, expected_error_msg):
     with pytest.raises(ValueError) as exc_info:
-        plot_temperature_perf(
+        plot_temperature_perf.__wrapped__( # Add .__wrapped__ to bypass the exception-swallowing decorator
             csv_file_path="fake_path.csv", 
             cycle_numbers_str=cycles_str, 
             temperatures_str=temp_str,
@@ -132,8 +132,8 @@ def test_hlt_inputs(cycles_str, temp_str, expected_error_msg):
 # ====================================================================================
 
 # Use @patch to intercept saving csv files and figures
-@patch("analytics.charge.pd.DataFrame.to_csv")
-@patch("analytics.charge.plt.Figure.savefig")
+@patch("analytics.ChargeProfile.pd.DataFrame.to_csv")
+@patch("analytics.ChargeProfile.plt.Figure.savefig")
 
 def test_missing_cycles():
     rawcsv_fn = "test_missing_cycle.csv"

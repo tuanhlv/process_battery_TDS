@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 @staticmethod
 def get_c_rate_color_map() -> dict[float, str]:
@@ -25,8 +26,12 @@ def extract_temperature_columns(df: pd.DataFrame) -> pd.DataFrame:
         df['Temperature1'] = df['X']
     elif 'T1' in df.columns and pd.api.types.is_numeric_dtype(df['T1']):
         df['Temperature1'] = df['T1']
+    else:
+        df['Temperature1'] = np.nan
 
     if 'T2' in df.columns and pd.api.types.is_numeric_dtype(df['T2']):
         df['Temperature2'] = df['T2']
+    else:
+        df['Temperature2'] = np.nan
         
     return df
