@@ -1,10 +1,11 @@
 # exposes plotting functions directly from the analytics package
 
-from .charge import plot_rate_charge
-from .discharge import plot_rate_discharge
-from .temperature import plot_temperature_perf
-from .ocv_dcir import plot_ocv, plot_dcir
-from .cycle_life import plot_cycle_life
+from .ChargeProfile import plot_rate_charge
+from .DischargeProfile import plot_rate_discharge
+from .HLT import plot_temperature_perf
+from .OCV import plot_ocv
+from .DCIR import plot_dcir
+from .CycleLife import plot_cycle_life
 
 __all__ = [
     "plot_rate_charge",
