@@ -1,13 +1,13 @@
 import pandas as pd
 
 @staticmethod
-def get_c_rate_color_map() -> Dict[float, str]:
+def get_c_rate_color_map() -> dict[float, str]:
     possible_rates = [0.1, 0.2, 0.33, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12]
     colors = ['grey', 'black', 'red', 'salmon', 'magenta', 'blue', 'skyblue', 'chocolate', 'orange', 'green', 'lightgreen', 'magenta', 'salmon', 'red', 'grey']
     return {rate: colors[i] for i, rate in enumerate(possible_rates)}
 
 @staticmethod
-def get_temp_color_map() -> Dict[int, str]:
+def get_temp_color_map() -> dict[int, str]:
     temps = [-60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60]
     colors = ['red', 'salmon', 'blue', 'skyblue', 'chocolate', 'orange', 'green', 'lightgreen', 'black', 'grey', 'magenta', 'violet', 'darkred']
     return {temp: colors[i] for i, temp in enumerate(temps)}
