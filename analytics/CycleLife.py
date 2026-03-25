@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from utils import handle_exceptions
-from common_helpers import get_c_rate_color_map
+from .common_helpers import get_c_rate_color_map
 
 @handle_exceptions("Charge Profiling")
 
