@@ -135,7 +135,7 @@ def test_hlt_inputs(cycles_str, temp_str, expected_error_msg):
 @patch("analytics.ChargeProfile.pd.DataFrame.to_csv")
 @patch("analytics.ChargeProfile.plt.Figure.savefig")
 
-def test_missing_cycles():
+def test_missing_cycles(mock_to_csv, mock_savefig):
     rawcsv_fn = "test_missing_cycle.csv"
     rawcsv_path = os.path.join("tests", rawcsv_fn)
     assert os.path.exists(csv_path), f"Test file missing: {csv_path}"  # Fail immediately with a clear error if the dummy CSV is missing 
