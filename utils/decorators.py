@@ -1,4 +1,5 @@
 from functools import wraps
+from collections.abc import Callable
 
 def handle_exceptions(stage: str):
     """Decorator to standardize error handling and logging for methods."""
