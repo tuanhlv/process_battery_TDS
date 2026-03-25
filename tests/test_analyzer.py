@@ -138,7 +138,7 @@ def test_hlt_inputs(cycles_str, temp_str, expected_error_msg):
 def test_missing_cycles(mock_to_csv, mock_savefig):
     rawcsv_fn = "test_missing_cycle.csv"
     rawcsv_path = os.path.join("tests", rawcsv_fn)
-    assert os.path.exists(csv_path), f"Test file missing: {csv_path}"  # Fail immediately with a clear error if the dummy CSV is missing 
+    assert os.path.exists(rawcsv_path), f"Test file missing: {csv_path}"  # Fail immediately with a clear error if the dummy CSV is missing 
     cycles = "1, 7"
     rates = "0.2, 10"
     

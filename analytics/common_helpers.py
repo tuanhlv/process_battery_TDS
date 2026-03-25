@@ -20,7 +20,7 @@ def extract_temperature_columns(df: pd.DataFrame) -> pd.DataFrame:
     df['Temperature2'] = None
     
     arbin_interp_colnames = df.columns[df.columns.str.startswith("T_") & df.columns.str.endswith("_interp")]
-    if len(arbin_interp) > 0 and pd.api.types.is_numeric_dtype(df[arbin_interp_colnames[0]]):
+    if len(arbin_interp_colnames) > 0 and pd.api.types.is_numeric_dtype(df[arbin_interp_colnames[0]]):
         df['Temperature1'] = df[arbin_interps[0]]
     elif 'X' in df.columns and pd.api.types.is_numeric_dtype(df['X']):
         df['Temperature1'] = df['X']
